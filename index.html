@@ -8,15 +8,10 @@
     <link rel="stylesheet" href="style.css" />
 </head>
 
-<body>
+<body onload="onloadFunc()">
     <header class="header">
         <h1>Pokédex</h1>
-        
-        <div>
-            <input type="text" id="pokemon-name" placeholder="Pokémon-Name eingeben" />
-            <button onclick="loadPokemon()">Laden</button>
-        </div>
-
+        <input type="text" id="pokemon-name" placeholder="Pokémon-Name eingeben" />
     </header>
 
     <div id="pokedex"></div>
