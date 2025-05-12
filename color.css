@@ -1,0 +1,19 @@
+.grass {
+    background-color: green;
+}
+
+.fire {
+    background-color: red;
+}
+
+.water {
+    background-color: blue;
+}
+
+.normal {
+    background-color: grey;
+}
+
+.bug {
+    background-color: rgb(147, 147, 0);
+}

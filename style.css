@@ -1,49 +1,106 @@
 body {
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #05171E;
-    color: #f5f5f5;
-    margin: 0;
-  }
-
-  .header {
-    background-color: #082029;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-  }
-  
-  input {
-    padding: 10px;
-    font-size: 1em;
-    border-radius: 5px;
-    border: none;
-  }
-
-  #pokedex {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 20px;
-    gap: 20px;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #05171E;
+  color: #f5f5f5;
+  margin: 0;
 }
 
-.pokemon-card {
-    background-color: #0c2d3d;
-    border-radius: 10px;
-    padding: 15px;
-    text-align: center;
-    width: 150px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    transition: transform 0.2s;
-    cursor: pointer;
+.header {
+  background-color: #082029;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
 }
 
-.pokemon-card:hover {
-    transform: scale(1.05);
+input {
+  padding: 10px;
+  font-size: 1em;
+  border-radius: 5px;
+  border: none;
 }
 
-.pokemon-card img {
-    width: 150px;
-    height: 150px;
+#pokedex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+  gap: 20px;
+}
+
+.pokemon_card {
+  background-color: #0c2d3d;
+  border-radius: 10px;
+  text-align: center;
+  width: 150px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.pokemon_card:hover {
+  transform: scale(1.05);
+}
+
+.pokemon_card img {
+  width: 150px;
+  height: 150px;
+}
+
+.pokemon_card h2 {
+  font-size: 18px;
+}
+
+.poke_overlay {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  border-radius: 25px;
+  background-color: rgba(0, 0, 0, 0.443);
+}
+
+.poke_dialog {
+  background-color: #102C37;
+  height: auto;
+  width: 300px;
+}
+
+.dialog_img{
+  width: 150px;
+  height: 150px;
+}
+
+.dialog_title {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 1.5em;
+}
+
+.dialog_tab {
+  display: flex;
+  justify-content:space-around;
+}
+
+.dialog_tab button {
+  width: 100px;
+}
+
+.dialog-padding {
+  padding: 10px;
+}
+
+.image-box {
+  width: 100%;
+  height: 150px;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

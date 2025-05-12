@@ -5,16 +5,52 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pokédex</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="color.css">
 </head>
 
 <body onload="onloadFunc()">
     <header class="header">
         <h1>Pokédex</h1>
-        <input type="text" id="pokemon-name" placeholder="Pokémon-Name eingeben" />
+        <input type="text" id="pokemon_name" placeholder="Pokémon-Name eingeben" oninput="filterPokemon()" />
     </header>
 
     <div id="pokedex"></div>
+
+
+    <div onclick="toggleOverlay()" id="poke-overlay" class="poke_overlay">
+
+        <div class="poke_dialog" onclick="stopPropagation(event)">
+
+            <div class="dialog_top" id="dialog_top">
+
+                <h2 id="current-title" class="dialog_title"></h2>
+
+                <div class="image-box" id="image-box-overlay">
+                    <img class="dialog_img" id="current-img" src="" alt="">
+                </div>
+
+            </div>
+
+            <div class="dialog_tab dialog-padding">
+                <button id="tab-btn-main" onclick="showMainInfo(currentPokemon)">Main</button>
+                <button id="tab-btn-stats" onclick="showStats(currentPokemon)">Stats</button>
+                <button id="tab-btn-chain">Chain</button>
+            </div>
+
+            <div class="dialog_info dialog-padding">
+
+            </div>
+
+        </div>
+
+    </div>
+    
+
+    <footer class="footer">
+
+    </footer>
+
 
     <script src="script.js" defer></script>
 </body>
