@@ -13,7 +13,7 @@
     <div id="fullscreen-spinner" class="spinner-overlay" style="display: none;">
         <div class="spinner"></div>
     </div>
-    
+
     <header class="header">
         <h1>Pokédex</h1>
         <input type="text" id="pokemon_name" placeholder="Pokémon-Name eingeben" oninput="filterPokemon()" />
@@ -21,10 +21,10 @@
 
     <div id="pokedex"></div>
 
-    
 
-    <div onclick="toggleOverlay()" id="poke-overlay" class="poke_overlay">
 
+    <div onclick="closeOverlay()" id="poke-overlay" class="poke_overlay">
+        
         <div class="poke_dialog" onclick="stopPropagation(event)">
 
             <div class="dialog_top" id="dialog_top">
@@ -47,16 +47,22 @@
 
             </div>
 
+            <div class="btn-container">
+                <button class="btn" onclick="prevPokemon()">&#10094;</button>
+                <span id="imgCounter"></span>
+                <button class="btn" onclick="nextPokemon()">&#10095;</button>
+            </div>
+
         </div>
 
     </div>
-    
+
 
     <footer class="footer">
         <div id="load-container">
             <button onclick="loadMorePokemon()" id="load-btn">Mehr Pokémon laden</button>
         </div>
-    </footer>  
+    </footer>
 
 
     <script src="script.js" defer></script>

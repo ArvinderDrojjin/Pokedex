@@ -15,7 +15,7 @@ body {
 
 input {
   padding: 10px;
-  font-size: 1em;
+  font-size: 16px;
   border-radius: 5px;
   border: none;
 }
@@ -92,6 +92,32 @@ input {
 
 .dialog-padding {
   padding: 10px;
+}
+
+#imgCounter {
+    display: flex;
+    color: white;
+    align-items: center;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    gap: 40px;
+}
+
+.btn {
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+}
+
+.btn:hover {
+    transform: scale(1.1);
+    background-color: rgb(172, 172, 172);
 }
 
 .image-box {

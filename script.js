@@ -4,6 +4,8 @@ let allPokemonData = []; // globale Liste aller geladenen Pokémon
 
 let currentOffset = 0;
 
+let currentPokemonIndex = 0;
+
 function onloadFunc() {
     loadData();
 }
@@ -51,7 +53,7 @@ function renderPokemonCards(pokemonArray) {
         let typeClass = detailData.types[0].type.name;
         let capitalizedName = detailData.name.charAt(0).toUpperCase() + detailData.name.slice(1);
         html +=
-            "<div class='pokemon_card' onclick='toggleOverlay(" + JSON.stringify(detailData) + ")'>" +
+            "<div class='pokemon_card' onclick='openOverlay(" + JSON.stringify(detailData) + ")'>" +
             "<h2>#" + detailData.id + " " + capitalizedName + "</h2>" +
             "<div class='image-box " + typeClass + "'>" +
             "<img src='" + detailData.sprites.front_default + "' alt='" + detailData.name + "' />" +
@@ -69,28 +71,59 @@ function filterPokemon() {
 
 let currentPokemon = null;
 
-function toggleOverlay(pokemon) {
+function openOverlay(pokemon) {
     currentPokemon = pokemon;
+    currentPokemonIndex = allPokemonData.findIndex(p => p.id === pokemon.id);
     let overlayRef = document.getElementById('poke-overlay');
+    overlayRef.style.display = "flex";
+    renderOverlay(currentPokemon);
+}
 
-    if (overlayRef.style.display === "none" || overlayRef.style.display === "") {
-        overlayRef.style.display = "flex";
+function closeOverlay() {
+    document.getElementById('poke-overlay').style.display = "none";
+}
 
-        let typeClass = pokemon.types[0].type.name;
-        let imageBox = document.getElementById('image-box-overlay');
-        imageBox.className = "image-box " + typeClass;
+function renderOverlay(pokemon) {
+    let typeClass = pokemon.types[0].type.name;
+    let imageBox = document.getElementById('image-box-overlay');
+    imageBox.className = "image-box " + typeClass;
 
-        document.getElementById('current-img').src = pokemon.sprites.front_default;
-        let capitalizedName = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
-        document.getElementById('current-title').textContent = "#" + pokemon.id + " " + capitalizedName;
-        document.getElementById('tab-btn-main').textContent = "Main";
-        document.getElementById('tab-btn-stats').textContent = "Stats";
-        document.getElementById('tab-btn-chain').textContent = "Entwicklung";
+    document.getElementById('current-img').src = pokemon.sprites.front_default;
+    let capitalizedName = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
+    document.getElementById('current-title').textContent = "#" + pokemon.id + " " + capitalizedName;
 
-        showMainInfo(pokemon);
-    } else {
-        overlayRef.style.display = "none";
+    document.getElementById('tab-btn-main').textContent = "Main";
+    document.getElementById('tab-btn-stats').textContent = "Stats";
+    document.getElementById('tab-btn-chain').textContent = "Entwicklung";
+
+    // Zähler aktualisieren
+    document.getElementById('imgCounter').textContent = `${currentPokemonIndex + 1}/${allPokemonData.length}`;
+
+    showMainInfo(pokemon);
+}
+
+function prevPokemon() {
+    if (allPokemonData.length === 0) return;
+
+    currentPokemonIndex--;
+    if (currentPokemonIndex < 0) {
+        currentPokemonIndex = allPokemonData.length - 1; // springt zum letzten Pokémon
     }
+
+    currentPokemon = allPokemonData[currentPokemonIndex];
+    renderOverlay(currentPokemon);
+}
+
+function nextPokemon() {
+    if (allPokemonData.length === 0) return;
+
+    currentPokemonIndex++;
+    if (currentPokemonIndex >= allPokemonData.length) {
+        currentPokemonIndex = 0; // springt zum ersten Pokémon
+    }
+
+    currentPokemon = allPokemonData[currentPokemonIndex];
+    renderOverlay(currentPokemon);
 }
 
 function showMainInfo(pokemon) {
