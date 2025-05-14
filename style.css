@@ -19,11 +19,6 @@ body {
   align-items: center;
 }
 
-.header-logo {
-  height: 60px;
-  width: 60px;
-}
-
 input {
   padding: 10px;
   font-size: 16px;
@@ -53,11 +48,6 @@ input {
   transform: scale(1.05);
 }
 
-.pokemon_card img {
-  width: 150px;
-  height: 150px;
-}
-
 .pokemon_card h2 {
   font-size: 18px;
 }
@@ -81,11 +71,6 @@ input {
   width: 300px;
 }
 
-.dialog_img{
-  width: 150px;
-  height: 150px;
-}
-
 .dialog_title {
   margin-top: 10px;
   text-align: center;
@@ -106,12 +91,6 @@ input {
   padding: 10px;
 }
 
-#imgCounter {
-    display: flex;
-    color: white;
-    align-items: center;
-}
-
 .btn-container {
     display: flex;
     justify-content: center;
@@ -130,17 +109,6 @@ input {
 .btn:hover {
     transform: scale(1.1);
     background-color: rgb(172, 172, 172);
-}
-
-.image-box {
-  width: 100%;
-  height: 150px;
-  padding: 0;
-  margin: 0;
-  border-radius: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .footer {
@@ -165,7 +133,7 @@ input {
   left: 0;
   height: 100vh;
   width: 100vw;
-  background-color: rgba(0, 0, 0, 0.6); /* leicht transparent */
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;

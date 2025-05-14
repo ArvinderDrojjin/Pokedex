@@ -1,6 +1,6 @@
 const BASE_URL = "https://pokeapi.co/api/v2/pokemon?limit=20&offset=0";
 
-let allPokemonData = []; // globale Liste aller geladenen Pokémon
+let allPokemonData = [];
 
 let currentOffset = 0;
 
@@ -15,7 +15,6 @@ async function loadData(append = false) {
     let response = await fetch(BASE_URL);
     let data = await response.json();
     let pokemonList = data.results;
-
     let newPokemonData = [];
 
     for (let i = 0; i < pokemonList.length; i++) {
@@ -24,9 +23,7 @@ async function loadData(append = false) {
         let detailData = await detailResponse.json();
         newPokemonData.push(detailData);
     }
-
     allPokemonData = append ? allPokemonData.concat(newPokemonData) : newPokemonData;
-
     renderPokemonCards(allPokemonData);
     currentOffset += 20;
 }
@@ -35,7 +32,6 @@ function loadMorePokemon() {
     const spinnerOverlay = document.getElementById("fullscreen-spinner");
     const pokedex = document.getElementById("pokedex");
 
-    // Alles verstecken & Spinner zeigen
     pokedex.style.display = "none";
     spinnerOverlay.style.display = "flex";
 
@@ -49,22 +45,20 @@ function loadMorePokemon() {
 
 function renderPokemonCards(pokemonArray) {
     let html = "";
-    for (let detailData of pokemonArray) {
-        let typeClass = detailData.types[0].type.name;
-        let capitalizedName = detailData.name.charAt(0).toUpperCase() + detailData.name.slice(1);
-        html +=
-            "<div class='pokemon_card' onclick='openOverlay(" + JSON.stringify(detailData) + ")'>" +
-            "<h2>#" + detailData.id + " " + capitalizedName + "</h2>" +
-            "<div class='image-box " + typeClass + "'>" +
-            "<img src='" + detailData.sprites.front_default + "' alt='" + detailData.name + "' />" +
-            "</div>" +
-            "</div>";
+    for (let pokemon of pokemonArray) {
+        html += generatePokemonCard(pokemon);
     }
     document.getElementById("pokedex").innerHTML = html;
 }
 
 function filterPokemon() {
     let input = document.getElementById("pokemon_name").value.toLowerCase();
+
+    if (input.length < 3) {
+        renderPokemonCards(allPokemonData);
+        return;
+    }
+
     let filtered = allPokemonData.filter(pokemon => pokemon.name.startsWith(input));
     renderPokemonCards(filtered);
 }
@@ -94,7 +88,6 @@ function renderOverlay(pokemon) {
 
     document.getElementById('tab-btn-main').textContent = "About";
     document.getElementById('tab-btn-stats').textContent = "Stats";
-    // Zähler aktualisieren
     document.getElementById('imgCounter').textContent = `${currentPokemonIndex + 1}/${allPokemonData.length}`;
 
     showMainInfo(pokemon);
@@ -105,7 +98,7 @@ function prevPokemon() {
 
     currentPokemonIndex--;
     if (currentPokemonIndex < 0) {
-        currentPokemonIndex = allPokemonData.length - 1; // springt zum letzten Pokémon
+        currentPokemonIndex = allPokemonData.length - 1;
     }
 
     currentPokemon = allPokemonData[currentPokemonIndex];
@@ -117,7 +110,7 @@ function nextPokemon() {
 
     currentPokemonIndex++;
     if (currentPokemonIndex >= allPokemonData.length) {
-        currentPokemonIndex = 0; // springt zum ersten Pokémon
+        currentPokemonIndex = 0; 
     }
 
     currentPokemon = allPokemonData[currentPokemonIndex];
@@ -126,21 +119,12 @@ function nextPokemon() {
 
 function showMainInfo(pokemon) {
     let infoDiv = document.querySelector(".dialog_info");
-    infoDiv.innerHTML =
-        "<p><strong>Height:</strong> " + pokemon.height + "</p>" +
-        "<p><strong>Weight:</strong> " + pokemon.weight + "</p>" +
-        "<p><strong>Type:</strong> " + pokemon.types.map(t => t.type.name).join(", ") + "</p>";
+    infoDiv.innerHTML = generateMainInfo(pokemon);
 }
 
 function showStats(pokemon) {
     let infoDiv = document.querySelector(".dialog_info");
-    let statsHtml = "";
-
-    for (let stat of pokemon.stats) {
-        statsHtml += "<p><strong>" + stat.stat.name + ":</strong> " + stat.base_stat + "</p>";
-    }
-
-    infoDiv.innerHTML = statsHtml;
+    infoDiv.innerHTML = generateStatsInfo(pokemon);
 }
 
 function stopPropagation(event) {
