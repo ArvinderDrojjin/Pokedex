@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pokédex</title>
+    <link rel="shortcut icon" href="styles.css/favicons/pokeball-1594373_640.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="color.css">
 </head>
@@ -15,7 +16,11 @@
     </div>
 
     <header class="header">
-        <h1>Pokédex</h1>
+        <div class="header-left">
+            <img class="header-logo" src="styles.css/favicons/pokeball-1594373_640.png" alt="">
+            <h1>Pokédex</h1>
+        </div>
+
         <input type="text" id="pokemon_name" placeholder="Pokémon-Name eingeben" oninput="filterPokemon()" />
     </header>
 
@@ -24,7 +29,7 @@
 
 
     <div onclick="closeOverlay()" id="poke-overlay" class="poke_overlay">
-        
+
         <div class="poke_dialog" onclick="stopPropagation(event)">
 
             <div class="dialog_top" id="dialog_top">
@@ -40,7 +45,6 @@
             <div class="dialog_tab dialog-padding">
                 <button id="tab-btn-main" onclick="showMainInfo(currentPokemon)">Main</button>
                 <button id="tab-btn-stats" onclick="showStats(currentPokemon)">Stats</button>
-                <button id="tab-btn-chain">Chain</button>
             </div>
 
             <div class="dialog_info dialog-padding">

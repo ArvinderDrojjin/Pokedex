@@ -92,10 +92,8 @@ function renderOverlay(pokemon) {
     let capitalizedName = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
     document.getElementById('current-title').textContent = "#" + pokemon.id + " " + capitalizedName;
 
-    document.getElementById('tab-btn-main').textContent = "Main";
+    document.getElementById('tab-btn-main').textContent = "About";
     document.getElementById('tab-btn-stats').textContent = "Stats";
-    document.getElementById('tab-btn-chain').textContent = "Entwicklung";
-
     // Zähler aktualisieren
     document.getElementById('imgCounter').textContent = `${currentPokemonIndex + 1}/${allPokemonData.length}`;
 
@@ -129,9 +127,9 @@ function nextPokemon() {
 function showMainInfo(pokemon) {
     let infoDiv = document.querySelector(".dialog_info");
     infoDiv.innerHTML =
-        "<p><strong>Größe:</strong> " + pokemon.height + "</p>" +
-        "<p><strong>Gewicht:</strong> " + pokemon.weight + "</p>" +
-        "<p><strong>Typ:</strong> " + pokemon.types.map(t => t.type.name).join(", ") + "</p>";
+        "<p><strong>Height:</strong> " + pokemon.height + "</p>" +
+        "<p><strong>Weight:</strong> " + pokemon.weight + "</p>" +
+        "<p><strong>Type:</strong> " + pokemon.types.map(t => t.type.name).join(", ") + "</p>";
 }
 
 function showStats(pokemon) {

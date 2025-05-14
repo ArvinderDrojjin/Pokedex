@@ -13,6 +13,17 @@ body {
   padding: 10px;
 }
 
+.header-left {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-logo {
+  height: 60px;
+  width: 60px;
+}
+
 input {
   padding: 10px;
   font-size: 16px;
@@ -87,7 +98,8 @@ input {
 }
 
 .dialog_tab button {
-  width: 100px;
+  width: 150px;
+  cursor: pointer;
 }
 
 .dialog-padding {
@@ -172,4 +184,34 @@ input {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+@media(max-width: 544px) {
+  input {
+    font-size: 10px;
+  }
+
+  h1 {
+    font-size: 30px;
+  }
+
+  .header-logo {
+    height: 30px;
+    width: 30px;
+  }
+}
+
+@media(max-width: 374px) {
+  input {
+    font-size: 8px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  .header-logo {
+    height: 24px;
+    width: 24px;
+  }
 }
