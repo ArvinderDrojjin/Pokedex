@@ -2,34 +2,57 @@ const BASE_URL = "https://pokeapi.co/api/v2/pokemon?limit=20&offset=0";
 
 let allPokemonData = []; // globale Liste aller geladenen Pokémon
 
+let currentOffset = 0;
+
 function onloadFunc() {
     loadData();
 }
 
-async function loadData() {
+async function loadData(append = false) {
+    const BASE_URL = `https://pokeapi.co/api/v2/pokemon?limit=20&offset=${currentOffset}`;
     let response = await fetch(BASE_URL);
     let data = await response.json();
     let pokemonList = data.results;
 
-    allPokemonData = []; // wichtig, um Mehrfachladefehler zu vermeiden
+    let newPokemonData = [];
 
     for (let i = 0; i < pokemonList.length; i++) {
         let pokemon = pokemonList[i];
         let detailResponse = await fetch(pokemon.url);
         let detailData = await detailResponse.json();
-        allPokemonData.push(detailData);
+        newPokemonData.push(detailData);
     }
 
-    renderPokemonCards(allPokemonData); // zeigt alle Pokémon
+    allPokemonData = append ? allPokemonData.concat(newPokemonData) : newPokemonData;
+
+    renderPokemonCards(allPokemonData);
+    currentOffset += 20;
+}
+
+function loadMorePokemon() {
+    const spinnerOverlay = document.getElementById("fullscreen-spinner");
+    const pokedex = document.getElementById("pokedex");
+
+    // Alles verstecken & Spinner zeigen
+    pokedex.style.display = "none";
+    spinnerOverlay.style.display = "flex";
+
+    setTimeout(() => {
+        loadData(true).then(() => {
+            spinnerOverlay.style.display = "none";
+            pokedex.style.display = "flex";
+        });
+    }, 3000);
 }
 
 function renderPokemonCards(pokemonArray) {
     let html = "";
     for (let detailData of pokemonArray) {
         let typeClass = detailData.types[0].type.name;
+        let capitalizedName = detailData.name.charAt(0).toUpperCase() + detailData.name.slice(1);
         html +=
             "<div class='pokemon_card' onclick='toggleOverlay(" + JSON.stringify(detailData) + ")'>" +
-            "<h2>#" + detailData.id + " " + detailData.name + "</h2>" +
+            "<h2>#" + detailData.id + " " + capitalizedName + "</h2>" +
             "<div class='image-box " + typeClass + "'>" +
             "<img src='" + detailData.sprites.front_default + "' alt='" + detailData.name + "' />" +
             "</div>" +
@@ -58,7 +81,8 @@ function toggleOverlay(pokemon) {
         imageBox.className = "image-box " + typeClass;
 
         document.getElementById('current-img').src = pokemon.sprites.front_default;
-        document.getElementById('current-title').textContent = "#" + pokemon.id + " " + pokemon.name;
+        let capitalizedName = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
+        document.getElementById('current-title').textContent = "#" + pokemon.id + " " + capitalizedName;
         document.getElementById('tab-btn-main').textContent = "Main";
         document.getElementById('tab-btn-stats').textContent = "Stats";
         document.getElementById('tab-btn-chain').textContent = "Entwicklung";

@@ -10,6 +10,10 @@
 </head>
 
 <body onload="onloadFunc()">
+    <div id="fullscreen-spinner" class="spinner-overlay" style="display: none;">
+        <div class="spinner"></div>
+    </div>
+    
     <header class="header">
         <h1>Pokédex</h1>
         <input type="text" id="pokemon_name" placeholder="Pokémon-Name eingeben" oninput="filterPokemon()" />
@@ -17,6 +21,7 @@
 
     <div id="pokedex"></div>
 
+    
 
     <div onclick="toggleOverlay()" id="poke-overlay" class="poke_overlay">
 
@@ -48,8 +53,10 @@
     
 
     <footer class="footer">
-
-    </footer>
+        <div id="load-container">
+            <button onclick="loadMorePokemon()" id="load-btn">Mehr Pokémon laden</button>
+        </div>
+    </footer>  
 
 
     <script src="script.js" defer></script>

@@ -1,19 +1,39 @@
 .grass {
-    background-color: green;
+    background-color: #79C251;
 }
 
 .fire {
-    background-color: red;
+    background-color: #F17F2D;
 }
 
 .water {
-    background-color: blue;
+    background-color: #6E8BC6;
 }
 
 .normal {
-    background-color: grey;
+    background-color: #ACAA7A;
 }
 
 .bug {
-    background-color: rgb(147, 147, 0);
+    background-color: #AABA39;
+}
+
+.electric {
+    background-color: #F7D233;
+}
+
+.poison {
+    background-color: #9E4399;
+}
+
+.ground {
+    background-color: #E0C166;
+}
+
+.fairy {
+    background-color: #F7CBDF;
+}
+
+.fighting {
+    background-color: #C4312B;
 }
