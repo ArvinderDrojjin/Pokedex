@@ -7,7 +7,16 @@ let currentOffset = 0;
 let currentPokemonIndex = 0;
 
 function onloadFunc() {
-    loadData();
+    const spinnerOverlay = document.getElementById("fullscreen-spinner");
+    const pokedex = document.getElementById("pokedex");
+
+    pokedex.style.display = "none";
+    spinnerOverlay.style.display = "flex";
+
+    loadData().then(() => {
+        spinnerOverlay.style.display = "none";
+        pokedex.style.display = "flex";
+    });
 }
 
 async function loadData(append = false) {
@@ -52,14 +61,24 @@ function renderPokemonCards(pokemonArray) {
 }
 
 function filterPokemon() {
-    let input = document.getElementById("pokemon_name").value.toLowerCase();
+    const input = document.getElementById("pokemon_name").value.toLowerCase();
+    const feedback = document.getElementById("search-feedback");
 
-    if (input.length < 3) {
+    if (input.length === 0) {
+        feedback.style.display = "none";
         renderPokemonCards(allPokemonData);
         return;
     }
 
-    let filtered = allPokemonData.filter(pokemon => pokemon.name.startsWith(input));
+    if (input.length < 3) {
+        feedback.textContent = "Bitte mindestens 3 Buchstaben eingeben";
+        feedback.style.display = "block";
+        renderPokemonCards(allPokemonData);
+        return;
+    }
+
+    feedback.style.display = "none";
+    const filtered = allPokemonData.filter(pokemon => pokemon.name.startsWith(input));
     renderPokemonCards(filtered);
 }
 
@@ -70,11 +89,15 @@ function openOverlay(pokemon) {
     currentPokemonIndex = allPokemonData.findIndex(p => p.id === pokemon.id);
     let overlayRef = document.getElementById('poke-overlay');
     overlayRef.style.display = "flex";
+
+    document.body.classList.add('no-scroll');
+
     renderOverlay(currentPokemon);
 }
 
 function closeOverlay() {
     document.getElementById('poke-overlay').style.display = "none";
+    document.body.classList.remove('no-scroll');
 }
 
 function renderOverlay(pokemon) {

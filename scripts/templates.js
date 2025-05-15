@@ -13,9 +13,11 @@ function generatePokemonCard(pokemon) {
 
 function generateMainInfo(pokemon) {
     return `
+    <div class="dialog-main-info">
         <p><strong>Height:</strong> ${pokemon.height}</p>
         <p><strong>Weight:</strong> ${pokemon.weight}</p>
         <p><strong>Type:</strong> ${pokemon.types.map(t => t.type.name).join(", ")}</p>
+    </div>
     `;
 }
 

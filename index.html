@@ -23,7 +23,11 @@
             <h1>Pokédex</h1>
         </div>
 
-        <input type="text" id="pokemon_name" placeholder="Pokémon-Name eingeben" oninput="filterPokemon()" />
+        <div class="header-right">
+            <input type="text" id="pokemon_name" placeholder="Pokémon-Name eingeben" oninput="filterPokemon()" />
+            <p id="search-feedback" class="search-feedback padding-left"></p>
+        </div>
+
     </header>
 
     <div id="pokedex"></div>
@@ -44,12 +48,12 @@
 
             </div>
 
-            <div class="dialog_tab dialog-padding">
+            <div class="dialog_tab padding-left">
                 <button id="tab-btn-main" onclick="showMainInfo(currentPokemon)">Main</button>
                 <button id="tab-btn-stats" onclick="showStats(currentPokemon)">Stats</button>
             </div>
 
-            <div class="dialog_info dialog-padding">
+            <div class="dialog_info padding-left">
 
             </div>
 
